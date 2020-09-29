@@ -10,4 +10,4 @@ Aim of the game is to knock the free floating geometric shapes into the other pl
 
 ## Structure
 ![Image of UML]
-(https://github.com/adamwickenden/crossfire/blob/master/CrossfireUML.jpg)
+(https://github.com/adamwickenden/crossfire/blob/master/CrossfireUML.jpg?raw=true)
