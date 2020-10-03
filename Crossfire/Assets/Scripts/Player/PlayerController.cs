@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    private Brain brain;
+
     [SerializeField]
     GameObject Player;
+    [SerializeField]
+    bool human;
+    [SerializeField]
+    bool right;
     [SerializeField]
     float rotationSpeed = 10f;
     [SerializeField]
@@ -22,41 +29,30 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (human)
+        {
+            UseHumanBrain();
+        }
+        else
+        {
+            UseAIBrain();
+        }
         Angle = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        aim();
-        slide();
+        brain.Tick();
     }
 
-    void aim()
+    public void UseHumanBrain()
     {
-        var point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        Vector3 dir = point - Player.transform.position;
-        dir.Normalize();
-
-        Angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        Angle = Mathf.Clamp(Angle, minAngle, maxAngle);
-
-        Quaternion q = Quaternion.Euler(0f, 0f, Angle); 
-        Player.transform.rotation = Quaternion.Slerp(Player.transform.rotation, q, Time.deltaTime * rotationSpeed);
+        brain = new HumanBrain(Player, rotationSpeed, slideSpeed, minAngle, maxAngle, minSlide, maxSlide, Angle, right);
     }
 
-    void slide()
+    public void UseAIBrain()
     {
-        float v = Input.GetAxis("Horizontal");
-
-        Vector3 tempVect = new Vector3(0f, v, 0f);
-        tempVect = tempVect.normalized * slideSpeed * Time.deltaTime;
-
-        Vector3 currentPosition = Player.transform.position;
-        currentPosition += tempVect;
-        currentPosition.y = Mathf.Clamp(currentPosition.y, minSlide, maxSlide);
-
-        Player.transform.position = currentPosition;
+        brain = new AIBrain(Player, rotationSpeed, slideSpeed, minAngle, maxAngle, minSlide, maxSlide, Angle);
     }
 }
