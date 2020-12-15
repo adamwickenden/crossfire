@@ -6,7 +6,7 @@ public class HumanBrain : Brain
 {
     private bool right;
 
-    public HumanBrain(GameObject playerObject, float rotationSpeed, float slideSpeed, float minAngle, float maxAngle, float minSlide, float maxSlide, float Angle, bool right) : base(playerObject, rotationSpeed, slideSpeed, minAngle, maxAngle, minSlide, maxSlide, Angle)
+    public HumanBrain(GameObject playerObject, float rotationSpeed, float slideSpeed, float minAngle, float maxAngle, float minSlide, float maxSlide, float Angle) : base(playerObject, rotationSpeed, slideSpeed, minAngle, maxAngle, minSlide, maxSlide, Angle)
     {
         this.right = right;
     }
@@ -24,13 +24,11 @@ public class HumanBrain : Brain
 
         Vector3 dir = point - playerObject.transform.position;
         dir.Normalize();
-        if (right)
-        {
-            dir = -dir;
-        }
+
 
         Angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         Angle = Mathf.Clamp(Angle, minAngle, maxAngle);
+
 
         Quaternion q = Quaternion.Euler(0f, 0f, Angle);
         playerObject.transform.rotation = Quaternion.Slerp(playerObject.transform.rotation, q, Time.deltaTime * rotationSpeed);

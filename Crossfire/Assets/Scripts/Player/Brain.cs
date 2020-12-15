@@ -10,7 +10,7 @@ public abstract class Brain
     protected float maxAngle;
     protected float minSlide;
     protected float maxSlide;
-    protected float Angle { get; set; }
+    public float Angle { get; protected set; }
 
     // Init class with gameobject of player
     public Brain(GameObject playerObject, float rotationSpeed, float slideSpeed, float minAngle, float maxAngle, float minSlide, float maxSlide, float Angle)

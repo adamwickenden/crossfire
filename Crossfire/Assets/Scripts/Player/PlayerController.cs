@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    private Brain brain;
+    public Brain brain { get; private set; }
 
     [SerializeField]
     GameObject Player;
@@ -18,13 +18,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float slideSpeed = 10f;
 
-    private float minAngle = -90f;
-    private float maxAngle = 90f;
+    private float minAngle = 90f;
+    private float maxAngle = -90f;
 
-    public float minSlide = -1.5f;
-    public float maxSlide = 1.5f;
+    private float minSlide = -1.5f;
+    private float maxSlide = 1.5f;
 
-    private float Angle { get; set; }
+    public float Angle;
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
     public void UseHumanBrain()
     {
-        brain = new HumanBrain(Player, rotationSpeed, slideSpeed, minAngle, maxAngle, minSlide, maxSlide, Angle, right);
+        brain = new HumanBrain(Player, rotationSpeed, slideSpeed, minAngle, maxAngle, minSlide, maxSlide, Angle);
     }
 
     public void UseAIBrain()
