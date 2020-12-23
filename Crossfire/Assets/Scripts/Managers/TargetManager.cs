@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetManager
@@ -9,13 +7,15 @@ public class TargetManager
     public List<Vector3> spawnPositions = new List<Vector3>();
     public List<GameObject> spawnedTargets = new List<GameObject>();
     public Vector3 lastSpawnPosition;
+    public int targetLimit = 3;
+    public int targetStart = -1;
 
-    // Start is called before the first frame update
+    // Initial spawn for start of game, called in awake
     public void InitialSpawn()
     {
-        for (int i=-1; i <= 1; i++)
+        for (int i=targetStart; i <= targetStart + targetLimit; i++)
         {
-            spawnPositions.Add(new Vector3(0f, i * 2f, -2f));
+            spawnPositions.Add(new Vector3(0f, i * 2, -2f));
 
             Debug.Log(spawnPositions);
 
@@ -23,10 +23,10 @@ public class TargetManager
         }
     }
 
-    // Update is called once per frame
+    // Respawns targets when they are less than the targetLimit
     public void RespawnTargets()
     {
-        if (spawnedTargets.Count < 3)
+        if (spawnedTargets.Count < targetLimit)
         {
             System.Random rnd = new System.Random();
             int idx = rnd.Next(0, 3);
@@ -79,7 +79,6 @@ public class TargetManager
             // Recursively re-check
             position = CheckPositionIntersection(newPosition);
         }
-
         return position;
     }
 }

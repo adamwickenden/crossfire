@@ -25,15 +25,15 @@ public class DebugManager : MonoBehaviour
         playerLeftDebug2 = GameObject.Find("PlayerLeftDebug2").GetComponent<Text>();
         playerRightDebug2 = GameObject.Find("PlayerRightDebug2").GetComponent<Text>();
 
-        //playerLeft = SceneManager.Instance.playerLeft.GetComponent<NewPlayerController>();
-        //playerRight = SceneManager.Instance.playerRight.GetComponent<NewPlayerController>();
+        playerLeft = SceneManager.Instance.playerLeft.GetComponentInChildren<NewPlayerController>();
+        playerRight = SceneManager.Instance.playerRight.GetComponentInChildren<NewPlayerController>();
     }
 
     private void Update()
     {
-        playerLeftDebug.text = "SCORE: " + SceneManager.Instance.score.playerLeftScore.ToString();
-        //playerLeftDebug2.text = SceneManager.Instance.targets.spawnedTargets.Count.ToString();
-        playerRightDebug.text = "SCORE: " + SceneManager.Instance.score.playerRightScore.ToString();
-        //playerRightDebug2.text = playerRight.transform.position.ToString();
+        playerLeftDebug.text = "P1 SCORE: " + SceneManager.Instance.score.playerLeftScore.ToString();
+        //playerLeftDebug2.text = "local pos P1: " + playerLeft.transform.localPosition.ToString();
+        playerRightDebug.text = "P2 SCORE: " + SceneManager.Instance.score.playerRightScore.ToString();
+        //playerRightDebug2.text = "local Position R-P1 " + playerLeft.transform.GetChild(0).transform.localPosition;
     }
 }

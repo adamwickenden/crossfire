@@ -106,6 +106,7 @@ public class NewPlayerController : MonoBehaviour
             aim.y = Mathf.Clamp(aim.y, -yBound, yBound);
 
             reticle.transform.position = aim;
+            //reticle.transform.localPosition = aim;
         }
         else
         {
@@ -134,6 +135,8 @@ public class NewPlayerController : MonoBehaviour
         Quaternion q = Quaternion.Euler(0f, 0f, angle);
 
         player.transform.rotation = Quaternion.Slerp(player.transform.rotation, q, Time.deltaTime * rotationSpeed);
+
+        reticle.transform.rotation = Quaternion.identity;
 
     }
 
