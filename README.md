@@ -1,6 +1,9 @@
 # crossfire
 Re-imagining of the old boardgame.
 
+## Trello
+https://trello.com/b/dZ539Pco/crossfire
+
 ## Gameplay
 A mashup of air-hockey, pool and pong basically.
 1. Each player guards a goal.
