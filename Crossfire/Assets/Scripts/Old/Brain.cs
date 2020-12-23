@@ -10,6 +10,7 @@ public abstract class Brain
     protected float maxAngle;
     protected float minSlide;
     protected float maxSlide;
+    public bool right;
     public float Angle { get; protected set; }
 
     // Init class with gameobject of player
@@ -27,5 +28,11 @@ public abstract class Brain
 
     // Abstract Tick function to execute all logic
     public abstract void Tick();
+
+    public void GetSide()
+    {
+        Vector3 reference = playerObject.transform.position - SceneManager.Instance.board.transform.position;
+        if (reference.x > 0) { right = true;  }
+    }
 
 }

@@ -4,7 +4,22 @@ using UnityEngine;
 
 public class AIBrain : Brain
 {
-    public AIBrain(GameObject playerObject, float rotationSpeed, float slideSpeed, float minAngle, float maxAngle, float minSlide, float maxSlide, float Angle) : base(playerObject, rotationSpeed, slideSpeed, minAngle, maxAngle, minSlide, maxSlide, Angle)
+    public AIBrain(GameObject playerObject,
+                   float rotationSpeed,
+                   float slideSpeed,
+                   float minAngle,
+                   float maxAngle,
+                   float minSlide,
+                   float maxSlide,
+                   float Angle) : 
+        base(playerObject,
+             rotationSpeed,
+             slideSpeed,
+             minAngle,
+             maxAngle,
+             minSlide,
+             maxSlide,
+             Angle)
     {
 
     }
@@ -12,16 +27,17 @@ public class AIBrain : Brain
     // Start is called before the first frame update
     public override void Tick()
     {
-        aim();
-        slide();
+        GetSide();
+        Aim();
+        Slide();
     }
 
-    public void aim()
+    public void Aim()
     {
 
     }
 
-    public void slide()
+    public void Slide()
     {
 
         float v = Mathf.Sin(Time.time * 5) * 3;

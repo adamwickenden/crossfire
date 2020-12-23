@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Board
   - Bullet
+  - LeftGoal
+  - RightGoal
   layers:
   - Default
   - TransparentFX
