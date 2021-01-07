@@ -7,19 +7,23 @@ public class TargetManager
     public List<Vector3> spawnPositions = new List<Vector3>();
     public List<GameObject> spawnedTargets = new List<GameObject>();
     public Vector3 lastSpawnPosition;
-    public int targetLimit = 3;
-    public int targetStart = -1;
+    public int targetLimit;
+
+    public TargetManager(int limit)
+    {
+        this.targetLimit = limit;
+    }
 
     // Initial spawn for start of game, called in awake
     public void InitialSpawn()
     {
-        for (int i=targetStart; i <= targetStart + targetLimit; i++)
+        for (int i=0; i < targetLimit; i++)
         {
-            spawnPositions.Add(new Vector3(0f, i * 2, -2f));
+            int centreOffset = Mathf.FloorToInt(targetLimit / 2);
 
-            Debug.Log(spawnPositions);
+            spawnPositions.Add(new Vector3(0f, (i - centreOffset) * 2 , 0f));
 
-            InstantiateTarget(spawnPositions[i + 1]);
+            InstantiateTarget(spawnPositions[i]);
         }
     }
 
@@ -29,7 +33,7 @@ public class TargetManager
         if (spawnedTargets.Count < targetLimit)
         {
             System.Random rnd = new System.Random();
-            int idx = rnd.Next(0, 3);
+            int idx = rnd.Next(0, targetLimit);
             Vector3 position = spawnPositions[idx];
 
             InstantiateTarget(CheckPositionIntersection(position));
@@ -38,7 +42,7 @@ public class TargetManager
 
     public void InstantiateTarget(Vector3 position)
     {
-        if (spawnedTargets.Count >= 3)
+        if (spawnedTargets.Count >= targetLimit)
         {
             Debug.Log("Max Targets");
         }
@@ -73,7 +77,7 @@ public class TargetManager
         if (intersects)
         {
             System.Random rnd = new System.Random();
-            int idx = rnd.Next(0, 3);
+            int idx = rnd.Next(0, targetLimit);
             Vector3 newPosition = spawnPositions[idx];
 
             // Recursively re-check

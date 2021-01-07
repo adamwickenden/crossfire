@@ -18,6 +18,8 @@ public class SceneManager : MonoBehaviour
 
     public static SceneManager Instance { get; private set; }
 
+    public int numTargets = 3;
+
     public void Awake()
     {
         if (Instance == null) { Instance = this; }
@@ -25,7 +27,7 @@ public class SceneManager : MonoBehaviour
 
         score = new ScoreManager();
 
-        targets = new TargetManager();
+        targets = new TargetManager(numTargets);
         targets.InitialSpawn();
 
         // Cache references to all desired variables

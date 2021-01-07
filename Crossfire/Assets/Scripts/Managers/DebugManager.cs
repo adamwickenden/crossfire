@@ -32,8 +32,8 @@ public class DebugManager : MonoBehaviour
     private void Update()
     {
         playerLeftDebug.text = "P1 SCORE: " + SceneManager.Instance.score.playerLeftScore.ToString();
-        //playerLeftDebug2.text = "local pos P1: " + playerLeft.transform.localPosition.ToString();
+        playerLeftDebug2.text = "P1 bullets: " + (playerLeft.GetComponent<WeaponManager>().maxBulletCount - playerLeft.GetComponent<WeaponManager>().activeBullets.Count);
         playerRightDebug.text = "P2 SCORE: " + SceneManager.Instance.score.playerRightScore.ToString();
-        //playerRightDebug2.text = "local Position R-P1 " + playerLeft.transform.GetChild(0).transform.localPosition;
+        playerRightDebug2.text = "P2 bullets: " + (playerRight.GetComponent<WeaponManager>().maxBulletCount - playerRight.GetComponent<WeaponManager>().activeBullets.Count);
     }
 }

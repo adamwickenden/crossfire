@@ -11,19 +11,21 @@ public class NewPlayerController : MonoBehaviour
     GameObject player;
     [SerializeField]
     GameObject reticle;
+    [SerializeField]
+    GameObject goal;
 
     private float rotationSpeed = 10f;
     private float slideSpeed = 5f;
     private float aimSpeed = 10f;
 
     private string aimType;
-    private float objectDepth = -2f;
+    private float objectDepth = 0f;
 
     private float minAngle = -90f;
     private float maxAngle = 90f;
 
-    private float minSlide = -1.8f;
-    private float maxSlide = 1.5f;
+    public float minSlide;
+    public float maxSlide;
 
     private float xBound = 8f;
     private float yBound = 5f;
@@ -31,15 +33,21 @@ public class NewPlayerController : MonoBehaviour
     public Vector3 movement = Vector3.zero;
     public Vector3 aim = new Vector3(0f, 0f, -2f);
 
+    private WeaponManager weaponManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(Gamepad.current.name);
+        weaponManager = this.gameObject.AddComponent<WeaponManager>();
+        weaponManager.goal = goal.GetComponent<goalScale>();
+
+        GetMoveLimits();
     }
 
     // Update is called once per frame
     void Update()
     {
+        GetMoveLimits();
         Move();
         Aim();
         Rotate();
@@ -52,7 +60,7 @@ public class NewPlayerController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            Fire();
+            weaponManager.Fire(player.transform.position, player.transform.right);
         }
     }
 
@@ -85,16 +93,6 @@ public class NewPlayerController : MonoBehaviour
         currPos.y = Mathf.Clamp(currPos.y, minSlide, maxSlide);
 
         player.transform.position = currPos;
-    }
-
-    private void Fire()
-    {
-        GameObject load = Resources.Load("Prefabs/Ball") as GameObject;
-        Vector3 spawn_pos = player.transform.position + player.transform.right * 0.5f;
-        GameObject ball = GameObject.Instantiate(load, spawn_pos, Quaternion.identity) as GameObject;
-
-        Vector3 velocity = player.transform.right * 10f;
-        ball.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
 
@@ -162,5 +160,13 @@ public class NewPlayerController : MonoBehaviour
         Vector3 reference = player.transform.position - SceneManager.Instance.board.transform.position;
         if (reference.x > 0) { return true; }
         else { return false; }
+    }
+
+    private void GetMoveLimits()
+    {
+        BoxCollider2D goalCollider = goal.GetComponent<BoxCollider2D>();
+
+        minSlide = goalCollider.transform.position.y - (goalCollider.bounds.size.y / 2);
+        maxSlide = goalCollider.transform.position.y + (goalCollider.bounds.size.y / 2);
     }
 }
