@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class goalScale : MonoBehaviour
+public class GoalScale : MonoBehaviour
 {
     private float shrinkRate = 0.999f;
 

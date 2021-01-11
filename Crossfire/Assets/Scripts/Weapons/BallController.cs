@@ -19,7 +19,10 @@ public class BallController : MonoBehaviour
     // Destroy on hit of goal
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        if (!collision.CompareTag("Boinger"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Destroy on collision with wall

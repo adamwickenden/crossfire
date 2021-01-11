@@ -13,25 +13,28 @@ public class NewPlayerController : MonoBehaviour
     GameObject reticle;
     [SerializeField]
     GameObject goal;
+    [SerializeField]
+    GameObject shield;
+
+    private float minSlide;
+    private float maxSlide;
+
+    private Vector3 movement = Vector3.zero;
+    private Vector3 aim = Vector3.zero;
 
     private float rotationSpeed = 10f;
     private float slideSpeed = 5f;
     private float aimSpeed = 10f;
 
     private string aimType;
+    private string controllerScheme;
     private float objectDepth = 0f;
 
     private float minAngle = -90f;
     private float maxAngle = 90f;
 
-    public float minSlide;
-    public float maxSlide;
-
     private float xBound = 8f;
     private float yBound = 5f;
-
-    public Vector3 movement = Vector3.zero;
-    public Vector3 aim = new Vector3(0f, 0f, -2f);
 
     private WeaponManager weaponManager;
 
@@ -39,7 +42,10 @@ public class NewPlayerController : MonoBehaviour
     void Start()
     {
         weaponManager = this.gameObject.AddComponent<WeaponManager>();
-        weaponManager.goal = goal.GetComponent<goalScale>();
+        weaponManager.goal = goal.GetComponent<GoalScale>();
+
+        controllerScheme = gameObject.GetComponent<PlayerInput>().currentControlScheme;
+        Debug.Log(controllerScheme);
 
         GetMoveLimits();
     }
@@ -67,7 +73,16 @@ public class NewPlayerController : MonoBehaviour
     public void MonitorMove(InputAction.CallbackContext ctx)
     {
         float y = Mathf.Clamp(ctx.ReadValue<float>(), minSlide, maxSlide);
-        movement.y = IsRight() ? y : -y;        
+        if (controllerScheme == "Keyboard&Mouse")
+        {
+            movement.y = IsRight() ? y : -y;
+        }
+        else
+        {
+            movement.y = y;
+        }
+
+
     }
 
     public void MonitorLook(InputAction.CallbackContext ctx)
@@ -79,6 +94,20 @@ public class NewPlayerController : MonoBehaviour
         {
             aim = Camera.main.ScreenToWorldPoint(aim);
             aim.z = objectDepth;
+        }
+    }
+
+    public void MonitorShield(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            shield.SetActive(true);
+            weaponManager.canFire = false;
+        }
+        if (ctx.canceled)
+        {
+            shield.SetActive(false);
+            weaponManager.canFire = true;
         }
     }
 

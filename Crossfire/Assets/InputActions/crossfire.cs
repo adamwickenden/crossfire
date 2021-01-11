@@ -41,6 +41,14 @@ public class @Crossfire : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""ShieldUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""0b456963-1dce-49e4-96c0-b77f03388a8a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -129,6 +137,28 @@ public class @Crossfire : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7398c891-24ef-4862-8162-c3a3abd112e4"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ShieldUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""38a9bc91-5795-4d2e-851b-305a2a879ef6"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ShieldUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -709,6 +739,7 @@ public class @Crossfire : IInputActionCollection, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_ShieldUp = m_Player.FindAction("ShieldUp", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -773,6 +804,7 @@ public class @Crossfire : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_ShieldUp;
     public struct PlayerActions
     {
         private @Crossfire m_Wrapper;
@@ -780,6 +812,7 @@ public class @Crossfire : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @ShieldUp => m_Wrapper.m_Player_ShieldUp;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -798,6 +831,9 @@ public class @Crossfire : IInputActionCollection, IDisposable
                 @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @ShieldUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShieldUp;
+                @ShieldUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShieldUp;
+                @ShieldUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShieldUp;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -811,6 +847,9 @@ public class @Crossfire : IInputActionCollection, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @ShieldUp.started += instance.OnShieldUp;
+                @ShieldUp.performed += instance.OnShieldUp;
+                @ShieldUp.canceled += instance.OnShieldUp;
             }
         }
     }
@@ -970,6 +1009,7 @@ public class @Crossfire : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnShieldUp(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

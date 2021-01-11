@@ -5,19 +5,21 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
 
-    public int maxBulletCount;
+    public int maxBulletCount { get; set; }
+    public float goalScaleFactor { get; set; }
 
-    public float goalScaleFactor;
+    public bool canFire { get; set; }
 
-    public List<GameObject> activeBullets;
+    public List<GameObject> activeBullets { get; set; }
 
-    public goalScale goal;
+    public GoalScale goal { get; set; }
 
-    public IWeapon currentWeapon;
+    public IWeapon currentWeapon { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
+        canFire = true;
         currentWeapon = new BaseWeapon();
         activeBullets = new List<GameObject>();
         maxBulletCount = currentWeapon.GetTotalBullets();
@@ -27,7 +29,13 @@ public class WeaponManager : MonoBehaviour
     // Update is called once per frame
     public void Fire(Vector3 position, Vector3 direction)
     {
-        if (activeBullets.Count < maxBulletCount)
+        if (activeBullets.Count >= maxBulletCount)
+        {
+            Debug.Log("MaxBullets");
+            return;
+        }
+
+        if (canFire)
         {
             GameObject bullet = currentWeapon.Fire(position, direction);
             bullet.GetComponent<BallController>().parentManager = this.GetComponent<WeaponManager>();
@@ -35,10 +43,6 @@ public class WeaponManager : MonoBehaviour
             goal.ScaleUp(goalScaleFactor);
 
             activeBullets.Add(bullet);
-        }
-        else
-        {
-            Debug.Log("MaxBullets");
         }
     }
 }
