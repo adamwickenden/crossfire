@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ public class GoalScale : MonoBehaviour
 
     private Vector3 baseScale = Vector3.one;
 
-    private float minScale = 1f;
+    private float minScale = 1.5f;
     private float maxScale = 4f;
 
     private void Start()

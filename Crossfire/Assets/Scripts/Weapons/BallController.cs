@@ -25,7 +25,7 @@ public class BallController : MonoBehaviour
         }
     }
 
-    // Destroy on collision with wall
+    // Destroy on collision with wall, or main ball
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
@@ -38,6 +38,10 @@ public class BallController : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+
+        if (collision.gameObject.CompareTag("Target")){
+            Destroy(gameObject);
         }
     }
 

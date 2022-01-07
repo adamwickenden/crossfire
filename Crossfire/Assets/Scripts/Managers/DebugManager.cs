@@ -9,8 +9,8 @@ public class DebugManager : MonoBehaviour
     public Text playerLeftDebug2;
     public Text playerRightDebug2;
 
-    private NewPlayerController playerLeft;
-    private NewPlayerController playerRight;
+    private Player playerLeft;
+    private Player playerRight;
 
     public static DebugManager Instance { get; private set; } // static singleton
 
@@ -25,14 +25,14 @@ public class DebugManager : MonoBehaviour
         playerLeftDebug2 = GameObject.Find("PlayerLeftDebug2").GetComponent<Text>();
         playerRightDebug2 = GameObject.Find("PlayerRightDebug2").GetComponent<Text>();
 
-        playerLeft = SceneManager.Instance.playerLeft.GetComponentInChildren<NewPlayerController>();
-        playerRight = SceneManager.Instance.playerRight.GetComponentInChildren<NewPlayerController>();
+        playerLeft = SceneManager.Instance.playerLeft.GetComponentInChildren<Player>();
+        playerRight = SceneManager.Instance.playerRight.GetComponentInChildren<Player>();
     }
 
     private void Update()
     {
         playerLeftDebug.text = "P1 SCORE: " + SceneManager.Instance.score.playerLeftScore.ToString();
-        playerLeftDebug2.text = playerLeft.IsRight().ToString();//"P1 bullets: " + (playerLeft.GetComponent<WeaponManager>().maxBulletCount - playerLeft.GetComponent<WeaponManager>().activeBullets.Count);
+        playerLeftDebug2.text = "P1 bullets: " + (playerLeft.GetComponent<WeaponManager>().maxBulletCount - playerLeft.GetComponent<WeaponManager>().activeBullets.Count);
         playerRightDebug.text = "P2 SCORE: " + SceneManager.Instance.score.playerRightScore.ToString();
         playerRightDebug2.text = "P2 bullets: " + (playerRight.GetComponent<WeaponManager>().maxBulletCount - playerRight.GetComponent<WeaponManager>().activeBullets.Count);
     }
