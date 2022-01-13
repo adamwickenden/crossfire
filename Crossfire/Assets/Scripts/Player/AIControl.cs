@@ -32,28 +32,30 @@ public class AIControl : MonoBehaviour, IControl
 
     public bool Shield()
     {
-        // Vector3 targetPos = Vector3.zero;
+        Vector3 targetPos = Vector3.zero;
 
-        // List<GameObject> t = SceneManager.Instance.targets.spawnedTargets;
-        // if (t.Count > 0){
-        //     targetPos = t[0].gameObject.transform.position;
-        // }
+        List<GameObject> t = SceneManager.Instance.targets.spawnedTargets;
+        if (t.Count > 0){
+            targetPos = t[0].gameObject.transform.position;
+        }
         
-        // Vector3 myPos = gameObject.GetComponentInParent<PlayerManager>().player.gameObject.transform.Find("Body").gameObject.transform.position;
+        Vector3 myPos = gameObject.GetComponentInParent<PlayerManager>().player.gameObject.transform.Find("Body").gameObject.transform.position;
 
-        // if ((targetPos - myPos).magnitude < 1){
-        //     shield = true;
-        // }
-        // else{
-        //     shield = false;
-        // }
-        return false;
+        if ((targetPos - myPos).magnitude < 1){
+            shield = false;
+        }
+        else{
+            shield = false;
+        }
+        return shield;
     }
 
     public float Move()
     {
-
-        move = SceneManager.Instance.targets.spawnedTargets[0].gameObject.transform.position.y;
+        List<GameObject> t = SceneManager.Instance.targets.spawnedTargets;
+        if (t.Count > 0){
+            move = t[0].gameObject.transform.position.y;
+        }
         float pos = body.position.y;
 
         move = move - pos;
@@ -67,12 +69,10 @@ public class AIControl : MonoBehaviour, IControl
         List<GameObject> t = SceneManager.Instance.targets.spawnedTargets;
         if (t.Count > 0){
             aim = t[0].gameObject.transform.position;
+            Vector2 temp = t[0].gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
+            Vector3 pred = new Vector3(temp.x, temp.y, 0f) * 2f;
+            aim = aim + pred;
         }
-
-        Vector2 temp = SceneManager.Instance.targets.spawnedTargets[0].gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
-        Vector3 pred = new Vector3(temp.x, temp.y, 0f) * 2f;
-        
-        aim = aim + pred;
 
         return aim;
     }

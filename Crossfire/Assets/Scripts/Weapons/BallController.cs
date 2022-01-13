@@ -19,9 +19,17 @@ public class BallController : MonoBehaviour
     // Destroy on hit of goal
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Boinger"))
+        if (collision.CompareTag("LeftGoal") | collision.CompareTag("RightGoal"))
         {
             Destroy(gameObject);
+        }
+
+        if(collision.CompareTag("PowerUp"))
+        {
+            // On collision witha power up; get and assign weapon, remove power up from list, destroy object
+            parentManager.ChangeWeapon(collision.GetComponent<PowerUpController>().weapon);
+            SceneManager.Instance.powerUps.RemovePowerUp(collision.gameObject);
+            Destroy(collision.gameObject);
         }
     }
 

@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public interface IWeapon
 {
     // Fire method, instantiates a game object, from the given position in the given direction
-    GameObject Fire(Vector3 position, Vector3 direction);
-
+    List<GameObject> Fire(Vector3 position, Vector3 direction);
+    // Getter that returns the bullets fired per shot
+    int GetBulletsPerShot();
     // Getter that returns the total bullets available for weapon
     int GetTotalBullets();
     // Getter that returns the goal scaling factor of bullets

@@ -8,6 +8,10 @@ TagManager:
   - Bullet
   - LeftGoal
   - RightGoal
+  - Wall
+  - Boinger
+  - Target
+  - PowerUp
   layers:
   - Default
   - TransparentFX

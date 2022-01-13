@@ -10,11 +10,15 @@ public class SceneManager : MonoBehaviour
     public GameObject leftGoal;
     public GameObject rightGoal;
 
+    public float spawnChance = 0.1f;
+
     public GameObject board;
 
     public ScoreManager score;
 
     public TargetManager targets;
+
+    public PowerUpManager powerUps;
 
     public static SceneManager Instance { get; private set; }
 
@@ -30,6 +34,8 @@ public class SceneManager : MonoBehaviour
         targets = new TargetManager(numTargets);
         targets.InitialSpawn();
 
+        powerUps = new PowerUpManager(spawnChance);
+
         // Cache references to all desired variables
         playerLeft = GameObject.Find("PlayerLeft");
         playerRight = GameObject.Find("PlayerRight");
@@ -43,5 +49,6 @@ public class SceneManager : MonoBehaviour
     public void Update()
     {
         targets.RespawnTargets();
+        powerUps.RespawnPowerUps();
     }
 }

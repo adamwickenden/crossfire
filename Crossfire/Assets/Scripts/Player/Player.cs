@@ -79,12 +79,12 @@ public class Player : MonoBehaviour
         if (control.Shield())
         {
             shield.SetActive(true);
-            weaponManager.canFire = false;
+            weaponManager.shieldUp = true;
         }
         if (!control.Shield())
         {
             shield.SetActive(false);
-            weaponManager.canFire = true;
+            weaponManager.shieldUp = false;
         }
     }
 

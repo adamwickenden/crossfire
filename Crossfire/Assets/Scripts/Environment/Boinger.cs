@@ -6,7 +6,7 @@ public class Boinger : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Target") | collision.CompareTag("Ball"))
+        if (collision.CompareTag("Target"))
         {
             Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
 
@@ -19,7 +19,7 @@ public class Boinger : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Target") | collision.CompareTag("Ball"))
+        if (collision.CompareTag("Target"))
         {
             Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
 
