@@ -155,6 +155,17 @@ public partial class @Crossfire : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""d5860afa-4a31-4cf1-8727-804196b7b632"",
+                    ""path"": ""<Gamepad>/leftStick/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""7398c891-24ef-4862-8162-c3a3abd112e4"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -167,7 +178,7 @@ public partial class @Crossfire : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""38a9bc91-5795-4d2e-851b-305a2a879ef6"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",

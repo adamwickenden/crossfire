@@ -15,7 +15,7 @@ public class TargetController : MonoBehaviour
     // Destroy on hit of goal, and call score.OnScore()
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Boinger"))
+        if (!collision.CompareTag("Boinger") & !collision.CompareTag("PowerUp"))
         {
             SceneManager.Instance.score.OnScore(collision.gameObject);
             SceneManager.Instance.targets.RemoveTarget(parent);

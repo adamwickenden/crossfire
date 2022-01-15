@@ -42,7 +42,7 @@ public class AIControl : MonoBehaviour, IControl
         Vector3 myPos = gameObject.GetComponentInParent<PlayerManager>().player.gameObject.transform.Find("Body").gameObject.transform.position;
 
         if ((targetPos - myPos).magnitude < 1){
-            shield = false;
+            shield = true;
         }
         else{
             shield = false;
