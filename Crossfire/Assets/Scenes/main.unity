@@ -844,7 +844,7 @@ MonoBehaviour:
   rightGoal: {fileID: 0}
   spawnChance: 0.001
   board: {fileID: 0}
-  numTargets: 1
+  numTargets: 5
 --- !u!4 &974492806
 Transform:
   m_ObjectHideFlags: 0
@@ -1014,7 +1014,7 @@ PrefabInstance:
     - target: {fileID: 4295595360576417116, guid: 04a9dffc14ed64d12bbee49be7817e2f,
         type: 3}
       propertyPath: humanControlled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4295595360576417117, guid: 04a9dffc14ed64d12bbee49be7817e2f,
         type: 3}
