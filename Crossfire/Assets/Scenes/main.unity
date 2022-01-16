@@ -844,7 +844,7 @@ MonoBehaviour:
   rightGoal: {fileID: 0}
   spawnChance: 0.001
   board: {fileID: 0}
-  numTargets: 5
+  numTargets: 1
 --- !u!4 &974492806
 Transform:
   m_ObjectHideFlags: 0

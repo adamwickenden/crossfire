@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GoalScale : MonoBehaviour
 {
+    // Name change hack
     private float shrinkRate = 0.999f;
 
     private Vector3 baseScale = Vector3.one;
