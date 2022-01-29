@@ -1,2 +1,4 @@
 # Mac Specific
 *.DS_Store
+
+[Bb]uilds/*
