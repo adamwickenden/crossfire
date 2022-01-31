@@ -1,28 +1,36 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SceneManager : MonoBehaviour
 {
     // Declare any public variables that you want to be able 
     // to access throughout your scene
+    [SerializeField]
     public GameObject playerLeft;
+    [SerializeField]
+    public GameObject playerLeftControl;
+    [SerializeField]
     public GameObject playerRight;
-
-    public GameObject leftGoal;
-    public GameObject rightGoal;
-
+    [SerializeField]
+    public GameObject playerRightControl;
+    [SerializeField]
     public float spawnChance = 0.1f;
+    [SerializeField]
+    public int numTargets = 1;
 
+
+    [HideInInspector]
+    public GameObject leftGoal;
+    [HideInInspector]
+    public GameObject rightGoal;
+    [HideInInspector]
     public GameObject board;
 
+
     public ScoreManager score;
-
     public TargetManager targets;
-
     public PowerUpManager powerUps;
-
     public static SceneManager Instance { get; private set; }
-
-    public int numTargets = 3;
 
     public void Awake()
     {
@@ -44,6 +52,44 @@ public class SceneManager : MonoBehaviour
         rightGoal = GameObject.Find("RightGoal");
 
         board = GameObject.Find("Board");
+
+        // Set up playerLeft based on MenuState
+        if (MenuState.playerLeftControl == 0){
+            Debug.Log("Setting player 1 to Human");
+            playerLeftControl.GetComponent<PlayerManager>().humanControlled = true;
+           
+            if (MenuState.playerLeftInput == 0) {
+                Debug.Log("Setting player 1 to Keyboard&Mouse");
+                playerLeftControl.transform.Find("Human").gameObject.GetComponent<PlayerInput>().defaultControlScheme = "Keyboard&Mouse";
+            }
+            else if (MenuState.playerLeftInput == 1) {
+                Debug.Log("Setting player 1 to Gamepad");
+                playerLeftControl.transform.Find("Human").gameObject.GetComponent<PlayerInput>().defaultControlScheme = "Gamepad";
+            }
+        }
+        else if (MenuState.playerLeftControl == 0) {
+            Debug.Log("Setting player 1 to AI");
+            playerLeftControl.GetComponent<PlayerManager>().humanControlled = false;
+        }
+
+        // Set up playerRight based on MenuState
+        if (MenuState.playerRightControl == 0){
+            Debug.Log("Setting player 2 to Human");
+            playerRightControl.GetComponent<PlayerManager>().humanControlled = true;
+
+            if (MenuState.playerRightInput == 0) {
+                Debug.Log("Setting player 2 to Keyboard&Mouse");
+                playerRightControl.transform.Find("Human").gameObject.GetComponent<PlayerInput>().defaultControlScheme = "Keyboard&Mouse";
+            }
+            else if (MenuState.playerLeftInput == 1) {
+                Debug.Log("Setting player 2 to Gamepad");
+                playerRightControl.transform.Find("Human").gameObject.GetComponent<PlayerInput>().defaultControlScheme = "Gamepad";
+            }
+        }
+        else{
+            Debug.Log("Setting player 2 to AI");
+            playerRightControl.GetComponent<PlayerManager>().humanControlled = false;
+        }
     }
 
     public void Update()

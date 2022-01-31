@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField]
-    bool humanControlled = true;
+    public bool humanControlled = true;
     [SerializeField]
     public GameObject player;
 

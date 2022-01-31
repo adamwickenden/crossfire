@@ -839,12 +839,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLeft: {fileID: 1824942592}
+  playerLeftControl: {fileID: 4295595360310335644}
   playerRight: {fileID: 14346055}
+  playerRightControl: {fileID: 1083916529}
+  spawnChance: 0.001
+  numTargets: 1
   leftGoal: {fileID: 0}
   rightGoal: {fileID: 0}
-  spawnChance: 0.001
   board: {fileID: 0}
-  numTargets: 1
 --- !u!4 &974492806
 Transform:
   m_ObjectHideFlags: 0
@@ -951,6 +953,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4295595360188211101, guid: 04a9dffc14ed64d12bbee49be7817e2f,
+        type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Keyboard&Mouse
+      objectReference: {fileID: 0}
     - target: {fileID: 4295595360576417107, guid: 04a9dffc14ed64d12bbee49be7817e2f,
         type: 3}
       propertyPath: m_RootOrder
@@ -1023,6 +1030,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04a9dffc14ed64d12bbee49be7817e2f, type: 3}
+--- !u!1 &1083916529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4295595360576417117, guid: 04a9dffc14ed64d12bbee49be7817e2f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1083916528}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1192913376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1386,6 +1399,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4295595360188211101, guid: 04a9dffc14ed64d12bbee49be7817e2f,
+        type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Keyboard&Mouse
+      objectReference: {fileID: 0}
+    - target: {fileID: 4295595360188211101, guid: 04a9dffc14ed64d12bbee49be7817e2f,
+        type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4295595360576417107, guid: 04a9dffc14ed64d12bbee49be7817e2f,
         type: 3}
       propertyPath: m_RootOrder
@@ -1449,7 +1472,7 @@ PrefabInstance:
     - target: {fileID: 4295595360576417116, guid: 04a9dffc14ed64d12bbee49be7817e2f,
         type: 3}
       propertyPath: humanControlled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4295595360576417117, guid: 04a9dffc14ed64d12bbee49be7817e2f,
         type: 3}
@@ -1458,3 +1481,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04a9dffc14ed64d12bbee49be7817e2f, type: 3}
+--- !u!1 &4295595360310335644 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4295595360576417117, guid: 04a9dffc14ed64d12bbee49be7817e2f,
+    type: 3}
+  m_PrefabInstance: {fileID: 4295595360310335643}
+  m_PrefabAsset: {fileID: 0}

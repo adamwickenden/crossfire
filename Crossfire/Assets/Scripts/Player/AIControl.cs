@@ -12,10 +12,11 @@ public class AIControl : MonoBehaviour, IControl
 
     private Transform body;
 
-    public void Start()
+    public void Awake()
     {
         body = gameObject.GetComponentInParent<PlayerManager>().player.gameObject.transform.Find("Body").gameObject.transform;
     }
+
     public bool Fire()
     {
 
