@@ -17,7 +17,7 @@ public class GoalScale : MonoBehaviour
         transform.localScale = baseScale;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         ScaleDown();
     }

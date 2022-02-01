@@ -48,7 +48,7 @@ public class AIControl : MonoBehaviour, IControl
         else{
             shield = false;
         }
-        return false;
+        return shield;
     }
 
     public float Move()

@@ -17,6 +17,10 @@ public class SceneManager : MonoBehaviour
     public float spawnChance = 0.1f;
     [SerializeField]
     public int numTargets = 1;
+    [SerializeField]
+    public GameObject pauseCanvas;
+    [SerializeField]
+    public GameObject scoreCanvas;
 
 
     [HideInInspector]
@@ -53,6 +57,9 @@ public class SceneManager : MonoBehaviour
 
         board = GameObject.Find("Board");
 
+        // Enforce timescale
+        Time.timeScale = 1f;
+
         // Set up playerLeft based on MenuState
         if (MenuState.playerLeftControl == 0){
             Debug.Log("Setting player 1 to Human");
@@ -67,7 +74,7 @@ public class SceneManager : MonoBehaviour
                 playerLeftControl.transform.Find("Human").gameObject.GetComponent<PlayerInput>().defaultControlScheme = "Gamepad";
             }
         }
-        else if (MenuState.playerLeftControl == 0) {
+        else {
             Debug.Log("Setting player 1 to AI");
             playerLeftControl.GetComponent<PlayerManager>().humanControlled = false;
         }
@@ -86,7 +93,7 @@ public class SceneManager : MonoBehaviour
                 playerRightControl.transform.Find("Human").gameObject.GetComponent<PlayerInput>().defaultControlScheme = "Gamepad";
             }
         }
-        else{
+        else {
             Debug.Log("Setting player 2 to AI");
             playerRightControl.GetComponent<PlayerManager>().humanControlled = false;
         }

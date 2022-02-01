@@ -49,6 +49,22 @@ public class HumanControl : MonoBehaviour, IControl
         }
     }
 
+    public void MonitorPause(InputAction.CallbackContext ctx)
+    {
+        if (SceneManager.Instance.scoreCanvas.activeInHierarchy && !SceneManager.Instance.pauseCanvas.activeInHierarchy)
+        {
+            Time.timeScale = 0f;
+            SceneManager.Instance.scoreCanvas.SetActive(false);
+            SceneManager.Instance.pauseCanvas.SetActive(true);
+        }
+        else if (!SceneManager.Instance.scoreCanvas.activeInHierarchy && SceneManager.Instance.pauseCanvas.activeInHierarchy)
+        {
+            Time.timeScale = 1f;
+            SceneManager.Instance.scoreCanvas.SetActive(true);
+            SceneManager.Instance.pauseCanvas.SetActive(false);
+        }
+    }
+
     public bool Fire(){
         return fire;
     }

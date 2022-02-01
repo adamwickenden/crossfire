@@ -54,8 +54,14 @@ public class MenuController : MonoBehaviour
 
             UnityEngine.SceneManagement.SceneManager.LoadScene("main");
         }
-        else {
+        else if (player1Control.GetComponent<Dropdown>().value == 1 && player1Control.GetComponent<Dropdown>().value == 1){
             warning.SetActive(true);
+            warning.GetComponent<TMPro.TextMeshProUGUI>().text = "At least one player must be Human.";
+        }
+        else
+        {
+            warning.SetActive(true);
+            warning.GetComponent<TMPro.TextMeshProUGUI>().text = "Players must use different controllers.";
         }
     }
 
