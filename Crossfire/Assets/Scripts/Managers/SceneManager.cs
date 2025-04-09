@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SceneManager : MonoBehaviour
@@ -16,7 +17,7 @@ public class SceneManager : MonoBehaviour
     [SerializeField]
     public float spawnChance = 0.1f;
     [SerializeField]
-    public int numTargets = 1;
+    public int numTargets = 3;
     [SerializeField]
     public GameObject pauseCanvas;
     [SerializeField]
@@ -60,6 +61,7 @@ public class SceneManager : MonoBehaviour
         // Enforce timescale
         Time.timeScale = 1f;
 
+        // TODO: This is where I assign controller based on the menu.
         // Set up playerLeft based on MenuState
         if (MenuState.playerLeftControl == 0){
             Debug.Log("Setting player 1 to Human");
