@@ -67,11 +67,6 @@ public class MenuController : MonoBehaviour
 
     public void Quit()
     {
-        // If application is running in the editor, quit the game
-        if (UnityEditor.EditorApplication.isPlaying)
-        {
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
         Application.Quit();
     }
 }
