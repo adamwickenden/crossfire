@@ -17,6 +17,8 @@ public class WeaponManager : MonoBehaviour
 
     public IWeapon currentWeapon { get; set; }
 
+    public float bulletScale { get; set; } = 1f;
+
     private bool weaponChanged;
 
     // Start is called before the first frame update
@@ -55,7 +57,7 @@ public class WeaponManager : MonoBehaviour
 
         if (canFire & !shieldUp)
         {
-            List<GameObject> bullets = currentWeapon.Fire(position, direction);
+            List<GameObject> bullets = currentWeapon.Fire(position, direction, bulletScale);
 
             for (int i = 0; i < bullets.Count; i++)
             {

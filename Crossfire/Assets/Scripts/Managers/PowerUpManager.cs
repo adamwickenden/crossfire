@@ -36,7 +36,7 @@ public class PowerUpManager
             Vector3 spawnPos = new Vector3(x, y, 0f);
 
             GameObject load = Resources.Load("Prefabs/PowerUp") as GameObject;
-            GameObject powerUp = GameObject.Instantiate(load, spawnPos, Quaternion.identity) as GameObject;
+            GameObject powerUp = Object.Instantiate(load, spawnPos, Quaternion.identity);
 
             activePowerUps.Add(powerUp);
         }
