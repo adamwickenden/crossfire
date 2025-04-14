@@ -51,7 +51,6 @@ public class WeaponManager : MonoBehaviour
     {
         if (activeBullets.Count >= maxBulletCount)
         {
-            Debug.Log("MaxBullets");
             return;
         }
 
@@ -61,7 +60,8 @@ public class WeaponManager : MonoBehaviour
 
             for (int i = 0; i < bullets.Count; i++)
             {
-                bullets[i].GetComponent<BallController>().parentManager = this.GetComponent<WeaponManager>();
+                bullets[i].GetComponent<BallController>().parentWeaponManager = this.GetComponent<WeaponManager>();
+                bullets[i].GetComponent<BallController>().parentPlayer = this.GetComponent<Player>();
                 goal.ScaleUp(goalScaleFactor);
                 activeBullets.Add(bullets[i]);
             }

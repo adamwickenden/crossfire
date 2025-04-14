@@ -1120,10 +1120,9 @@ MonoBehaviour:
   playerLeftControl: {fileID: 4295595360310335644}
   playerRight: {fileID: 14346055}
   playerRightControl: {fileID: 1083916529}
-  spawnChance: 0.001
-  numTargets: 3
   pauseCanvas: {fileID: 1930939106}
   scoreCanvas: {fileID: 1338503987}
+  numTargets: 3
   leftGoal: {fileID: 0}
   rightGoal: {fileID: 0}
   board: {fileID: 0}

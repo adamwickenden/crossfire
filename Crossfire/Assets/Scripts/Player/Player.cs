@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
 
     private WeaponManager weaponManager;
 
+    public IModifier activeModifier;
+
     void Awake()
     {
         weaponManager = this.gameObject.AddComponent<WeaponManager>();

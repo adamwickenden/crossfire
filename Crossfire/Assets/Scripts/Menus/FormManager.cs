@@ -40,8 +40,6 @@ public class FormManager : MonoBehaviour
 					
 					if (!inputDropdown.options.Contains(controllerName))
 					{
-						Debug.Log(controllerName);
-						Debug.Log(inputDropdown.options[0]);
 						inputDropdown.options.Add(controllerName);
 					}
 				}

@@ -1,26 +1,31 @@
-
-using System.Threading;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 
 public class BallScaleModifier : IModifier
 {
-    public WeaponManager weaponManager;
+    private WeaponManager weaponManager;
     
-    public float Timeout {get;} = 20f;
+    public float Timeout {get;} = 5f;
     
     // Start is called before the first frame update
     public void Activate(GameObject collision)
-    {   
-        weaponManager = collision.GetComponentInParent<WeaponManager>();
+    {
+        weaponManager = collision.GetComponent<BallController>().parentWeaponManager;
         
-        float bulletScale = Random.value;
-        weaponManager.bulletScale = bulletScale;
+        int x = Random.Range(0, 2);
+        switch (x) 
+        {
+            case 0:
+                weaponManager.bulletScale = 0.05f;
+                break;
+            case 1:
+                weaponManager.bulletScale = 0.5f;
+                break;
+        }
     }
-    
+
     public void Deactivate()
     {
-        weaponManager.bulletScale = 1f;
+        weaponManager.bulletScale = 0.2f;
     }
 
 }

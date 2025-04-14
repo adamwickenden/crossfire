@@ -48,9 +48,8 @@ public class TargetManager
         }
         else
         {
-            Debug.Log("Instantiating Target");
             GameObject load = Resources.Load("Prefabs/Target") as GameObject;
-            GameObject target = GameObject.Instantiate(load, position, Quaternion.identity) as GameObject;
+            GameObject target = Object.Instantiate(load, position, Quaternion.identity) as GameObject;
             spawnedTargets.Add(target);
         }
     }

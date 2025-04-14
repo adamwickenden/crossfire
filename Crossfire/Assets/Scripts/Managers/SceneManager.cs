@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SceneManager : MonoBehaviour
@@ -15,27 +14,24 @@ public class SceneManager : MonoBehaviour
     [SerializeField]
     public GameObject playerRightControl;
     [SerializeField]
-    public float spawnChance = 0.1f;
-    [SerializeField]
-    public int numTargets = 3;
-    [SerializeField]
     public GameObject pauseCanvas;
     [SerializeField]
-    public GameObject scoreCanvas;
+    public GameObject scoreCanvas;    
 
-
+    [HideInInspector]
+    public int numTargets = 3;
     [HideInInspector]
     public GameObject leftGoal;
     [HideInInspector]
     public GameObject rightGoal;
     [HideInInspector]
     public GameObject board;
-
-
     public ScoreManager score;
     public TargetManager targets;
-    public PowerUpManager powerUps;
+    public ModifierManager modifiers;
     public static SceneManager Instance { get; private set; }
+    
+    private float spawnChance = 0.001f;
 
     public void Awake()
     {
@@ -47,7 +43,7 @@ public class SceneManager : MonoBehaviour
         targets = new TargetManager(numTargets);
         targets.InitialSpawn();
 
-        powerUps = new PowerUpManager(spawnChance);
+        modifiers = new ModifierManager(spawnChance);
 
         // Cache references to all desired variables
         playerLeft = GameObject.Find("PlayerLeft");
@@ -104,6 +100,6 @@ public class SceneManager : MonoBehaviour
     public void Update()
     {
         targets.RespawnTargets();
-        powerUps.RespawnPowerUps();
+        modifiers.RespawnModifiers();
     }
 }

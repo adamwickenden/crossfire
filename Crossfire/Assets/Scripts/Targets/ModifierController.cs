@@ -7,6 +7,10 @@ public class ModifierController : MonoBehaviour
     public IModifier modifier {get; set;}
 
     private float startTime;
+
+    private bool activated = false;
+
+    private Player playerActivatedBy;
     
     private List<IModifier> modifiers = new List<IModifier>();
 
@@ -25,16 +29,25 @@ public class ModifierController : MonoBehaviour
         if (collision.CompareTag("Ball"))
         {
             startTime = Time.time;
+            activated = true;
             modifier.Activate(collision.gameObject);
+            playerActivatedBy = collision.GetComponentInParent<BallController>().parentPlayer;
+            playerActivatedBy.activeModifier = modifier;
+            
             Destroy(collision.gameObject);
         }
     }
 
     void Update()
     {
-        if (Time.time > startTime + modifier.Timeout)
+        if ((Time.time > startTime + modifier.Timeout) & activated)
         {
-            modifier.Deactivate();
+            Debug.Log("Timeout passed, destroying");
+            if (modifier == playerActivatedBy.activeModifier)
+            {
+                modifier.Deactivate();
+            }
+            Destroy(gameObject);
         }
     }
 
