@@ -16,6 +16,8 @@ public class ModifierController : MonoBehaviour
 
     void Awake(){
         modifiers.Add(new BallScaleModifier());
+        modifiers.Add(new TargetMadnessModifier());
+        modifiers.Add(new ModifierMadnessModifier());
     }
 
     // Start is called before the first frame update
@@ -31,9 +33,11 @@ public class ModifierController : MonoBehaviour
             startTime = Time.time;
             activated = true;
             modifier.Activate(collision.gameObject);
-            playerActivatedBy = collision.GetComponentInParent<BallController>().parentPlayer;
-            playerActivatedBy.activeModifier = modifier;
-            
+            if (modifier.targetAffector == TargetAffector.player)
+            {
+                playerActivatedBy = collision.GetComponentInParent<BallController>().parentPlayer;
+                playerActivatedBy.activeModifier = modifier;
+            }
             Destroy(collision.gameObject);
         }
     }
@@ -43,7 +47,14 @@ public class ModifierController : MonoBehaviour
         if ((Time.time > startTime + modifier.Timeout) & activated)
         {
             Debug.Log("Timeout passed, destroying");
-            if (modifier == playerActivatedBy.activeModifier)
+            if (modifier.targetAffector == TargetAffector.player)
+            {
+                if (modifier == playerActivatedBy.activeModifier)
+                {
+                    modifier.Deactivate();
+                }
+            }
+            else if (modifier.targetAffector == TargetAffector.scene)
             {
                 modifier.Deactivate();
             }

@@ -3,8 +3,9 @@ using UnityEngine;
 public class BallScaleModifier : IModifier
 {
     private WeaponManager weaponManager;
-    
     public float Timeout {get;} = 5f;
+
+    public TargetAffector targetAffector { get; } = TargetAffector.player;
     
     // Start is called before the first frame update
     public void Activate(GameObject collision)

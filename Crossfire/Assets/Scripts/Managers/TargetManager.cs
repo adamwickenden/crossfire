@@ -7,12 +7,7 @@ public class TargetManager
     public List<Vector3> spawnPositions = new List<Vector3>();
     public List<GameObject> spawnedTargets = new List<GameObject>();
     public Vector3 lastSpawnPosition;
-    public int targetLimit;
-
-    public TargetManager(int limit)
-    {
-        this.targetLimit = limit;
-    }
+    public int targetLimit = 1;
 
     // Initial spawn for start of game, called in awake
     public void InitialSpawn()
@@ -57,6 +52,16 @@ public class TargetManager
     public void RemoveTarget(GameObject target)
     {
         spawnedTargets.Remove(target);
+    }
+    
+    public void DestroyAllTargets()
+    {
+        for (int i = 0; i < spawnedTargets.Count; i++)
+        {
+            Object.Destroy(spawnedTargets[i]);
+        }
+        spawnedTargets.Clear();
+        spawnPositions.Clear();
     }
 
     private Vector3 CheckPositionIntersection(Vector3 position)

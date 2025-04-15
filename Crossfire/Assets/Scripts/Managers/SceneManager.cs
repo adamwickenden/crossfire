@@ -19,8 +19,6 @@ public class SceneManager : MonoBehaviour
     public GameObject scoreCanvas;    
 
     [HideInInspector]
-    public int numTargets = 3;
-    [HideInInspector]
     public GameObject leftGoal;
     [HideInInspector]
     public GameObject rightGoal;
@@ -30,8 +28,6 @@ public class SceneManager : MonoBehaviour
     public TargetManager targets;
     public ModifierManager modifiers;
     public static SceneManager Instance { get; private set; }
-    
-    private float spawnChance = 0.001f;
 
     public void Awake()
     {
@@ -40,10 +36,10 @@ public class SceneManager : MonoBehaviour
 
         score = new ScoreManager();
 
-        targets = new TargetManager(numTargets);
+        targets = new TargetManager();
         targets.InitialSpawn();
 
-        modifiers = new ModifierManager(spawnChance);
+        modifiers = new ModifierManager();
 
         // Cache references to all desired variables
         playerLeft = GameObject.Find("PlayerLeft");

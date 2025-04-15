@@ -8,4 +8,12 @@ public interface IModifier
     void Deactivate();
     // Return a timeout for the Modifier
     float Timeout { get; } 
+    // What the modifier affects
+    TargetAffector targetAffector { get; }
+}
+
+public enum TargetAffector
+{
+    player,
+    scene
 }
